@@ -1,0 +1,111 @@
+.areaTitle {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+.areaTitleText {
+	color: #585858;
+	font-size: 28px;
+	font-family: 'Arial';
+	font-weight: 600;
+	margin: 70px 0 40px 0;
+}
+.statisticsContent {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.statistics {
+	background-color: #fff;
+	border-radius: 28;
+	padding: 20px;
+}
+
+.inviteFriendContent {
+	width: 400px;
+	flex-direction: column;
+}
+.inviteFriendArea {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.inviteFriend {
+	background-color: #c94040;
+	border-radius: 28px 28px 0 0;
+	padding: 0 40px;
+	height: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.inviteFriendDown {
+	background-color: #fff;
+	border-radius: 0 0 28px 28px;
+	margin-bottom: 50px;
+}
+
+.inviteInfo {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center
+}
+
+.middleContent {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 40px;
+	margin-bottom: 20
+}
+
+
+.topSharersTitle {
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	cursor: default;
+	user-select: none;
+}
+.topSharersScrollTb {
+	max-height: 700px;
+	overflow: auto;
+	background-color: #fff;
+	padding: 20px 40px 30px 40px;
+	border-radius: 30
+}
+.topSharersTable {
+	cursor: default;
+	user-select: none;
+}
+.topSharersTable tbody tr td {
+	padding: 10px 20px;
+	text-align: center;
+}
+.topSharersTable thead tr th {
+	padding: 10px 20px;
+}
+.topSharersPfpc {
+	width: 20px;
+	border-radius: 50%;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+.topSharersData {
+	display: flex;
+	align-items: center;
+}
+
+
+@media screen and (max-width: 768px) {
+	.statisticsContent {
+		flex-direction: column;
+	}
+	.statisticsMarginTop {
+		margin-top: 30px;
+	}
+
+	.statistics {
+		width: 356px;
+	}
+}

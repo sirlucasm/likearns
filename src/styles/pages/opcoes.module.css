@@ -1,0 +1,46 @@
+.areaTitle {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+.areaTitleText {
+	color: '#585858';
+	font-size: 28;
+	font-family: Arial;
+	font-weight: 600;
+	margin: 35px 0 35px 20px;
+}
+
+.inputField {
+	width: 30em;
+}
+.areaInput {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.importProfilePic {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.profilePic {
+	background-color: #f9f9f9;
+	user-select: none;
+	-webkit-user-drag: none;
+	width: 124px;
+	height: 128px;
+	border-radius: 50%;
+}
+.importProfilePicBtn {
+	border: none;
+	padding: 8px 10px;
+}
+
+@media screen and (max-width: 425px) {
+	.inputField {
+		width: 12em;
+	}
+}

@@ -1,0 +1,40 @@
+.areaTitle {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+.areaTitleText {
+	color: '#585858';
+	font-size: 28;
+	font-family: Arial;
+	font-weight: 600;
+	margin: 35px 0 35px 20px;
+}
+
+.formArea {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.formContent {
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 40px 80px;
+	box-shadow: 0px 10px 41px -25px rgba(0,0,0,0.75);
+	
+}
+.formContent div {
+	width: 300px;
+}
+
+@media screen and (max-width: 1120px) {
+	.formContent {
+		padding: 25px 40px;
+	}
+	.formContent div {
+		width: 240px;
+	}
+}
+

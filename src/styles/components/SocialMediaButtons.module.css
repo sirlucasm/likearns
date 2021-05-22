@@ -1,0 +1,8 @@
+.logoutSocialMedia {
+	cursor: pointer;
+	color: #1594de;
+	transition: .3s;
+}
+.logoutSocialMedia:hover {
+	color: #1c618a;
+}

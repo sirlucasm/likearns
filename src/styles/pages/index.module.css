@@ -1,0 +1,171 @@
+.header {
+	margin-top: 60px;
+	background-color: #c94040;
+	height: 400px;
+	padding: 90px 120px;
+}
+
+.header-title h3{
+	font-size: 42px;
+	font-family: Timeless;
+	font-weight: 600;
+	color:#350505;
+}
+
+.header-title-gain-words {
+	background-color: #fff;
+	padding: 4px 6px;
+}
+
+.header-paragraph {
+	padding: 30px  0;
+}
+
+.header-paragraph p {
+	color:#fff;
+	width: 512px;
+}
+
+
+.content-header {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	padding: 60px 0;
+}
+
+.content-header-title { margin-bottom: 30px; }
+
+.content-header-title h3{
+	font-weight: 700;
+	font-size: 29px;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	position: relative;
+	text-align: center;
+	user-select: none;
+}
+
+.content-header-title h3::after {
+	content: '';
+	background-color: #c94040;
+	position: absolute;
+	width: 40%;
+	height: 3px;
+	border-radius: 10px;
+	margin: 50px auto;
+	left: 0;
+	right: 0;
+	transition: .4s;
+}
+
+.content-header-title h3:hover::after {
+	width: 55%;
+}
+
+.content-header-paragraph { margin-bottom: 60px; }
+
+.content-header-paragraph p {
+	text-align: center;
+	width: 35vw;
+}
+
+
+.content-how-to-use {
+	padding: 50px 0;
+}
+.content-how-to-use-items {
+	background-color: rgb(41, 41, 41);
+	color: #dedede;
+	text-align: center;
+}
+
+.content-how-to-use-items h3{
+	margin-bottom: 15px;
+	user-select: none;
+}
+.content-how-to-use-items p {
+	color: #c3c3c3;
+	user-select: none;
+}
+
+.content-how-to-use-icons {
+	font-size: 64px;
+	transition: .15s;
+	margin-bottom: 30px;
+	margin-top: 15px;
+}
+
+.content-how-to-use-icons:hover {
+	color: #c94040;
+}
+
+
+.content-help {
+	width: 100%;
+	padding: 50px 0;
+}
+
+.content-help-title { margin-bottom: 50px; }
+.content-help-title h3::after {
+	content: '';
+	background-color: #c94040;
+	position: absolute;
+	width: 7.5%;
+	height: 3px;
+	border-radius: 10px;
+	margin: 50px auto;
+	left: 0;
+	right: 0;
+	transition: .4s;
+}
+
+.content-help-title h3:hover::after {
+	width: 10.5%;
+}
+
+
+.content-contact {
+	padding: 50px 0;
+	background-color: #e4e4e4;
+}
+
+
+@media screen and (max-width: 620px) {
+	.header {
+		padding: 40px 20px;
+		height: 350px;
+	}
+
+	.header-title h3{
+		font-size: 25px;
+		width: 100%;
+	}
+
+	.header-title-gain-words {
+		background-color: #fff;
+		padding: 2px 7px;
+	}
+
+	.header-paragraph p {
+		width: 100%;
+	}
+
+
+	.content-header-paragraph p {
+		width: 85vw;
+	}
+
+	.content-header-title h3{
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 767px) {}
+
+@media screen and (max-width: 1120px) {
+	.content-header-paragraph p {
+		width: 90vw;
+	}
+}

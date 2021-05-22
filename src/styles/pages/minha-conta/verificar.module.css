@@ -1,0 +1,55 @@
+.verifyEmailRedArea {
+	width: 100%;
+	background-color: #c94040;
+	display: flex;
+	justify-content: center;
+	height: 40vh
+}
+
+.verifyEmailRedAreaTitle {
+	font-family: Arial;
+	font-size: 28px;
+	letter-spacing: 1px;
+	font-weight: 600;
+	color: #fff;
+	margin-top: 60px;
+}
+
+.verifyEmailImage {
+	width: 192px;
+	height: 192px;
+}
+
+.verifyEmailWhiteArea {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	bottom: 150px;
+}
+
+.verifyEmailWhiteContent {
+	background-color: #fff;
+	width: 40vw;
+}
+
+.verifyEmailText1 {
+	width: 30vw;
+	margin-top: 10px;
+}
+
+.verifyEmailText2 {
+	width: 40vw;
+	margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+	.verifyEmailWhiteContent {
+		width: 90vw;
+	}
+	.verifyEmailText1 {
+		width: 70vw;
+	}
+	.verifyEmailText2 {
+		width: 80vw;
+	}
+}

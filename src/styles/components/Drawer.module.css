@@ -1,0 +1,23 @@
+.list {
+	width: 280px;
+}
+
+.profileInfo {
+	display: flex;
+	align-items: center;
+	margin: 12px 8px;
+	background-color: #dedede;
+	cursor: pointer;
+	border-radius: 6px;
+}
+.noUserImage {
+	width: 60px;
+	height: 65px;
+	border-radius: 50%;
+	padding: 12px;
+}
+.profileName {
+	margin-left: 8px;
+	font-size: 13px;
+	font-weight: bold;
+}

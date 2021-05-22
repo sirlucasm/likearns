@@ -1,0 +1,28 @@
+.loader-bg-dark {
+	background-color: rgba(0,0,0, .5) !important;
+	position: fixed;
+    top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+}
+
+.loader-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.loader {
+	background-color: #c94040;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	width: 230px;
+	height: 94px;
+}
+
+.loader-title span{
+	font-size: 14.5px;
+}
