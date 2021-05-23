@@ -73,9 +73,3 @@ export const ClaimButtonDisabled = styled.button`
 	border-radius: 50%;
 	padding: 3px 6px;
 `;
-
-export const DailyRewardClaimed = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;

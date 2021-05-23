@@ -79,16 +79,20 @@ export default function DailyReward({ me }) {
 						</Tooltip>
 					</DetailReward>
 					<Points>
-						<RiCopperCoinLine size={18} />
-						<h3 style={{ margin: '5px 0 0 3px', }}>100</h3>
+						{
+							me.reward_daily || formatedTime ?
+							<span style={{ marginTop: 4 }}>{formatedTime}</span>
+							:
+							<>
+								<RiCopperCoinLine size={18} />
+								<h3 style={{ margin: '5px 0 0 3px', }}>100</h3>
+							</>
+						}
 					</Points>
 					<div style={{ marginTop: 9 }}>
 						{
 							me.reward_daily || formatedTime ?
-								<DailyRewardClaimed>
-									<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
-									<span style={{ marginTop: 4 }}>{formatedTime}</span>
-								</DailyRewardClaimed>
+								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
 								<ClaimButton onClick={() => claimReward('reward_daily', 100)}>Resgatar</ClaimButton>
 						}
