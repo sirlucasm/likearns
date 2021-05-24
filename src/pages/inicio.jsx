@@ -92,14 +92,15 @@ function Start({
 												<tr key={index} style={topSharersBgColorChange(index)}>
 													<td><strong>{index}.</strong></td>
 													<td className={styles.topSharersData}>
-														<Image
-															style={cursorPointer}
-															className={styles.topSharersPfpc}
-															width={24}
-															height={24}
-															src={data.social_profile_picture || '/assets/icons/no_user.png'}
-															alt="Foto de perfil"
-														/>
+														<div className={styles.topSharersPfpc}>
+															<Image
+																style={cursorPointer}
+																width={24}
+																height={24}
+																src={data.social_profile_picture || '/assets/icons/no_user.png'}
+																alt="Foto de perfil"
+															/>
+														</div>
 														<span style={cursorPointer}> {data.username}</span>
 													</td>
 													<td><span>{data.invited_friends}</span></td>

@@ -178,6 +178,7 @@ const GainEarnsCoins = ({
 
 	const twitterFollowUser = (param) => {
 		param.twitter = userTwitter;
+		param.current_user = me.id;
 		UserService.verifyIfUserFollowed({ gain_follower_id: param.id })
 			.then(res => {
 				if (!res.following) {
@@ -225,6 +226,7 @@ const GainEarnsCoins = ({
 			url: param.post_url,
 			username: getPostId[0],
 		}
+		param.current_user = me.id;
 		UserService.verifyIfUserPostLiked({ gain_like_id: param.id })
 			.then(res => {
 				if (!res.liking) {

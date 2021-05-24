@@ -86,14 +86,15 @@
 	padding: 10px 20px;
 }
 .topSharersPfpc {
-	width: 20px;
-	border-radius: 50%;
+	width: 24px;
 	user-select: none;
 	-webkit-user-drag: none;
 }
+.topSharersPfpc img { border-radius: 50% !important; }
+
 .topSharersData {
 	display: flex;
-	align-items: center;
+	align-self: center;
 }
 
 
