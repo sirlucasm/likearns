@@ -142,3 +142,8 @@ export function dailyRewardDateVerify(dateTimeString) {
 		minutes
 	};
 }
+
+export function convertNotificationTypeString(notificationType) {
+	if (notificationType == 1) return 'seguindo';
+	if (notificationType == 2) return 'curtiu';
+}

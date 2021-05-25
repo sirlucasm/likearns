@@ -1,4 +1,6 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
 
 // imports
 import {
@@ -6,6 +8,10 @@ import {
 	Badge
 } from '@material-ui/core';
 import styled from 'styled-components';
+import Notifications from './Notifications';
+
+// services
+import UserNotificationService from '../../services/UserNotificationService';
 
 // icons
 import {
@@ -42,6 +48,7 @@ const ButtonsArea = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	position: relative;
 `;
 
 const Notification = styled(Points)`
@@ -50,10 +57,22 @@ const Notification = styled(Points)`
 
 export default function StartNav({ setOpenMenu, profile }) {
 	const router = useRouter();
+	const [openNotification, setOpenNotificaion] = useState(false);
+	const [usersNotifications, setUsersNotification] = useState([]);
 
 	const handleLinkURL = (url) => {
 		router.push(url);
 	};
+
+	const fetchNotifications = async () => {
+		const token = Cookie.get('session_token');
+		const notifications = await UserNotificationService.getUserNotifications(token);
+		setUsersNotification(notifications);
+	}
+
+	useEffect(() => {
+		fetchNotifications();
+	}, []);
 
 	return (
 		<div style={customStyles.root}>
@@ -61,11 +80,16 @@ export default function StartNav({ setOpenMenu, profile }) {
 				<Button onClick={() => setOpenMenu(true)}><FiMenu style={{ fontSize: 24 }} /></Button>
 			</div>
 			<ButtonsArea>
-				<Notification>
-					<Badge color="error" badgeContent={12} max={99}>
+				<Notification onClick={() => setOpenNotificaion(!openNotification)}>
+					<Badge color="error" badgeContent={usersNotifications.length} max={99}>
 						<RiNotification3Line size={20} />
 					</Badge>
 				</Notification>
+				<Notifications
+					open={openNotification}
+					me={profile}
+					usersNotifications={usersNotifications}
+				/>
 				<Points onClick={() => handleLinkURL('/ganhar-earnscoins')}>
 					<RiCopperCoinLine size={20} />
 					<span style={{ margin: '7px 0 0 3px', position: 'relative', top: 1, userSelect: 'none' }}>{profile?.points}</span>
