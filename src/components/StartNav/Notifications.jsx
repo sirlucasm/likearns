@@ -7,7 +7,10 @@ import {
 	Title,
 	Notification,
 	UserImage,
-	Content
+	Content,
+	UsernameText,
+	Message,
+	BottomButton
 } from '../../styles/components/Notifications';
 import {
 	convertNotificationTypeString,
@@ -17,7 +20,7 @@ import Image from 'next/image';
 
 function Notifications({
 	open,
-	me,
+	readNotifications,
 	usersNotifications
 }) {
 
@@ -32,17 +35,21 @@ function Notifications({
 						usersNotifications.map((notification, index) => {
 							return (
 								<Content key={index}>
-									<UserImage>
-										<Image src={notification.user.social_profile_picture || '/assets/icons/no_user.png'} height={26} width={26} />
+									<UserImage haveProfilePic={notification.user.social_profile_picture !== null}>
+										<Image
+											src={notification.user.social_profile_picture || '/assets/icons/no_user.png'}
+											height={26}
+											width={26}
+										/>
 									</UserImage>
-									<div>
+									<Message>
 										{
 											notification.type == 1 ?
-												<span>{notification.user.username} está te <span>{convertNotificationTypeString(notification.type)}</span> no {convertSocialMediaToString(notification.social_media)}.</span>
+												<span><UsernameText>{notification.user.username}</UsernameText> está te {convertNotificationTypeString(notification.type)} no {convertSocialMediaToString(notification.social_media)}.</span>
 												:
-												<span>{notification.user.username} <span>{convertNotificationTypeString(notification.type)}</span> sua postagem no {convertSocialMediaToString(notification.social_media)}.</span>
+												<span><UsernameText>{notification.user.username}</UsernameText> {convertNotificationTypeString(notification.type)} sua postagem no {convertSocialMediaToString(notification.social_media)}.</span>
 										}
-									</div>
+									</Message>
 								</Content>
 							);
 						})
@@ -52,6 +59,11 @@ function Notifications({
 						</div>
 				}
 			</Notification>
+			<BottomButton>
+				<div onClick={readNotifications}>
+					<span>Limpar</span>
+				</div>
+			</BottomButton>
 		</Dropdown>
 	)
 	else return (<></>);

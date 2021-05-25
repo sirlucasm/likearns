@@ -58,7 +58,7 @@ const Notification = styled(Points)`
 export default function StartNav({ setOpenMenu, profile }) {
 	const router = useRouter();
 	const [openNotification, setOpenNotificaion] = useState(false);
-	const [usersNotifications, setUsersNotification] = useState([]);
+	const [usersNotifications, setUsersNotifications] = useState([]);
 
 	const handleLinkURL = (url) => {
 		router.push(url);
@@ -67,7 +67,16 @@ export default function StartNav({ setOpenMenu, profile }) {
 	const fetchNotifications = async () => {
 		const token = Cookie.get('session_token');
 		const notifications = await UserNotificationService.getUserNotifications(token);
-		setUsersNotification(notifications);
+		setUsersNotifications(notifications);
+	}
+
+	const readNotifications = () => {
+		let notificationsList = [];
+		if (usersNotifications.length > 0) {
+			usersNotifications.map(notification => notificationsList.push(notification.id));
+			UserNotificationService.setNotificationReaded({ notificationsList })
+				.then(() => router.reload())
+		}
 	}
 
 	useEffect(() => {
@@ -89,6 +98,7 @@ export default function StartNav({ setOpenMenu, profile }) {
 					open={openNotification}
 					me={profile}
 					usersNotifications={usersNotifications}
+					readNotifications={readNotifications}
 				/>
 				<Points onClick={() => handleLinkURL('/ganhar-earnscoins')}>
 					<RiCopperCoinLine size={20} />
