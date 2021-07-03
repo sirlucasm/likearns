@@ -9,6 +9,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import GlobalStyles from '../styles/globals/index';
 import '../styles/animations.css';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#__next');
 
 function MyApp({ Component, pageProps }) {
 	useEffect(() => {

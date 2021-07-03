@@ -28,6 +28,7 @@ import styles from '../styles/pages/opcoes.module.css';
 // services
 import TwitterService from '../services/TwitterService';
 import UserService from '../services/UserService';
+import InstagramService from '../services/InstagramService';
 
 // icons
 import {
@@ -55,6 +56,7 @@ const Options = ({ me }) => {
 	});
 	const [changes, setChanges] = useState();
 	const [userTwitter, setUserTwitter] = useState();
+	const [userInstagram, setUserInstagram] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 	const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
 
@@ -101,6 +103,10 @@ const Options = ({ me }) => {
 
 	const fetchCurrentUserTwitter = () => {
 		setUserTwitter(TwitterService.getCurrentUser());
+	}
+
+	const fetchCurrentUserInstagram = () => {
+		setUserInstagram(InstagramService.getCurrentUser());
 	}
 
 	const deleteAccount = () => {
@@ -172,6 +178,7 @@ const Options = ({ me }) => {
 
 	useEffect(() => {
 		fetchCurrentUserTwitter();
+		fetchCurrentUserInstagram();
 		if (me) setIsLoading(false);
 	}, []);
 

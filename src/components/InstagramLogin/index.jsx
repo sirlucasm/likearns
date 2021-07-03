@@ -2,21 +2,19 @@ import { useState } from 'react';
 
 // imports
 import Modal from 'react-modal';
-import Swal from 'sweetalert2';
 import SimpleInput from '../../components/SimpleInput';
 import {
 	CustomButton
 } from '../../components/Styleds';
 
-// services
-import UserService from '../../services/UserService';
-
 // icons
 import {
-	RiCloseFill
+	RiCloseFill,
+	RiInstagramLine
 } from 'react-icons/ri';
 import {
-	FiUser
+	FiUser,
+	FiLock
 } from 'react-icons/fi';
 
 const customStyles = {
@@ -47,36 +45,26 @@ const customStyles = {
 		padding: '0 20px'
 	},
 
-	contentFormDiv: {
+	contentFormInput: {
 		width: 250
+	},
+
+	logoContent: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		marginBottom: 20
 	}
 };
 
-export default function ForgetPassword({
+function InstagramLogin({
 	isOpen,
 	closeModal,
 }) {
-	const [email, setEmail] = useState();
+	const [username, setUsername] = useState();
+	const [password, setPassword] = useState();
 
-	const sendResetPasswordEmail = (e) => {
-		UserService.sendResetPasswordEmail({ email })
-			.then(() => Swal.fire({
-				position: 'top-end',
-				icon: 'success',
-				text: 'Email de reset de senha enviado por email.',
-				showConfirmButton: false,
-				timer: 2500,
-			})
-				.then(() => {
-					closeModal();
-				})
-			).catch((error) => Swal.fire({
-				position: 'top-end',
-				icon: 'error',
-				text: error?.data.message,
-				showConfirmButton: false,
-				timer: 2500,
-			}));
+	const loginWInstagram = (e) => {
 		e.preventDefault();
 	}
 
@@ -87,34 +75,48 @@ export default function ForgetPassword({
 			style={customStyles}
 			contentLabel="Example Modal"
 		>
-			<div style={customStyles.modalArea}>
+			<div>
 				<div style={{ ...customStyles.headArea, marginBottom: 20 }}>
 					<span></span>
 					<div>
 						<span onClick={closeModal}><RiCloseFill size={28} /></span>
 					</div>
 				</div>
-				<div>
-					<label htmlFor='email'>Digite o seu email cadastrado</label>
+				<div style={customStyles.logoContent}>
+					<RiInstagramLine size={48} />
 				</div>
-				<form autoComplete="off" onSubmit={sendResetPasswordEmail} style={customStyles.contentForm}>
+				<form autoComplete="off" onSubmit={loginWInstagram} style={customStyles.contentForm}>
 					<SimpleInput
-						type="email"
-						onChange={e => setEmail(e.target.value)}
-						placeholder="Seu email"
-						id='email'
+						type="text"
+						onChange={e => setUsername(e.target.value)}
+						placeholder="Usuário"
+						id='username'
 						icon={
 							<FiUser color={'#505050'} />
 						}
 						iconPosition="right"
 						required
-						style={customStyles.contentFormDiv}
+						style={customStyles.contentFormInput}
 					/>
-					<CustomButton primary type="submit">
-						Enviar email
+					<SimpleInput
+						type="password"
+						onChange={e => setPassword(e.target.value)}
+						placeholder="Senha"
+						id='password'
+						icon={
+							<FiLock color={'#505050'} />
+						}
+						iconPosition="right"
+						required
+						style={customStyles.contentFormInput}
+					/>
+					<CustomButton primary type="submit" style={{ marginTop: 20 }}>
+						Entrar
 					</CustomButton>
 				</form>
 			</div>
 		</Modal>
 	);
 }
+
+export default InstagramLogin;

@@ -5,11 +5,9 @@ import { useRouter } from 'next/router';
 import Drawer from '../components/Drawer';
 import StartNav from '../components/StartNav';
 import { CustomButton } from '../components/Styleds';
-import UserService from '../services/UserService';
 import GainFollowerService from '../services/GainFollowerService';
 import GainLikeService from '../services/GainLikeService';
 import Swal from 'sweetalert2';
-import TwitterService from '../services/TwitterService';
 import {
 	calculatePointsToEarn,
 } from '../utils';
@@ -20,6 +18,11 @@ import {
 import SocialMediaButtons from '../components/SocialMediaButtons';
 import DailyReward from '../components/DailyReward';
 import styles from '../styles/pages/ganhar-earnscoins.module.css';
+
+// services
+import TwitterService from '../services/TwitterService';
+import UserService from '../services/UserService';
+import InstagramService from '../services/InstagramService';
 
 // icons
 import {
@@ -40,6 +43,7 @@ const GainEarnsCoins = ({
 	const [pageF, setPageF] = useState(1);
 	const [limitF, setLimitF] = useState(10);
 	const [userTwitter, setUserTwitter] = useState();
+	const [userInstagram, setUserInstagram] = useState();
 
 	const deleteGainFollowers = (id) => {
 		Swal.fire({
@@ -176,6 +180,10 @@ const GainEarnsCoins = ({
 		setUserTwitter(TwitterService.getCurrentUser());
 	}
 
+	const fetchCurrentUserInstagram = () => {
+		setUserInstagram(InstagramService.getCurrentUser());
+	}
+
 	const twitterFollowUser = (param) => {
 		param.twitter = userTwitter;
 		param.current_user = me.id;
@@ -268,6 +276,7 @@ const GainEarnsCoins = ({
 	useEffect(() => {
 		sendOAuthTokens();
 		fetchCurrentUserTwitter();
+		fetchCurrentUserInstagram();
 	}, []);
 
 	return (

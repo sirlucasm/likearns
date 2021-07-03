@@ -1,3 +1,4 @@
+import { useState } from 'react';
 //imports
 import { CustomButton } from '../Styleds';
 import styles from '../../styles/components/SocialMediaButtons.module.css';
@@ -11,14 +12,13 @@ import {
 	RiTwitterLine,
 	RiShieldUserFill
 } from 'react-icons/ri';
+import InstagramLogin from '../InstagramLogin';
 
 export default function SocialMediaButtons({ userTwitter }) {
+	const [isOpen, setIsOpen] = useState(false);
+
 	const conectWithInstagram = () => {
-		window.location.href = `https://api.instagram.com/oauth/authorize?
-		client_id=241693594216500
-		&redirect_uri=https://likearns.com.br/ganhar-earnscoins
-		&response_type=code
-		&scope=user_profile,user_media`;
+		setIsOpen(true);
 	}
 
 	const conectWithTwitter = () => {
@@ -57,6 +57,10 @@ export default function SocialMediaButtons({ userTwitter }) {
 						</CustomButton>
 				}
 			</div>
+			<InstagramLogin
+				isOpen={isOpen}
+				closeModal={() => setIsOpen(false)}
+			/>
 		</>
 	);
 }
