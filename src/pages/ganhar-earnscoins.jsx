@@ -297,6 +297,7 @@ const GainEarnsCoins = ({
 			<div className="container">
 				<SocialMediaButtons
 					userTwitter={userTwitter}
+					userInstagram={userInstagram}
 				/>
 			</div>
 

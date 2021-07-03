@@ -22,4 +22,13 @@ export default {
 			return Promise.reject(error.response);
 		}
 	},
+
+	async logoutUser() {
+		try {
+			localStorage.removeItem('@likearns/instagram_token');
+		}
+		catch (error) {
+			return Promise.reject(error);
+		}
+	}
 }

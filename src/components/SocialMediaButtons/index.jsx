@@ -5,6 +5,7 @@ import styles from '../../styles/components/SocialMediaButtons.module.css';
 
 // services
 import TwitterService from '../../services/TwitterService';
+import InstagramService from '../../services/InstagramService';
 
 // icons
 import {
@@ -14,7 +15,7 @@ import {
 } from 'react-icons/ri';
 import InstagramLogin from '../InstagramLogin';
 
-export default function SocialMediaButtons({ userTwitter }) {
+export default function SocialMediaButtons({ userTwitter, userInstagram }) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const conectWithInstagram = () => {
@@ -32,13 +33,30 @@ export default function SocialMediaButtons({ userTwitter }) {
 			.then(() => window.location.reload())
 	}
 
+	const logoutInstagramSocial = () => {
+		InstagramService.logoutUser()
+			.then(() => window.location.reload())
+	}
+
 	return (
 		<>
 			<div>
-				<CustomButton onClick={conectWithInstagram}>
-					<RiInstagramLine size={24} />
-					<span> Conectar com Instagram</span>
-				</CustomButton>
+
+				{
+					userInstagram ?
+						<div className="ml-3">
+							<span>
+								<RiShieldUserFill color="#4caf50" size={24} className="mr-1" />
+								Conectado no Instagram como <span style={{ fontWeight: 'bold' }}>{userInstagram.userName}</span>,
+								<span onClick={logoutInstagramSocial} className={styles.logoutSocialMedia}> sair</span>
+							</span>
+						</div>
+						:
+						<CustomButton onClick={conectWithInstagram}>
+							<RiInstagramLine size={24} />
+							<span> Conectar com Instagram</span>
+						</CustomButton>
+				}
 			</div>
 			<div>
 				{
@@ -46,8 +64,8 @@ export default function SocialMediaButtons({ userTwitter }) {
 						<div className="ml-3">
 							<span>
 								<RiShieldUserFill color="#4caf50" size={24} className="mr-1" />
-									Conectado no Twitter como <span style={{ fontWeight: 'bold' }}>{userTwitter.userName}</span>,
-									<span onClick={logoutTwitterSocial} className={styles.logoutSocialMedia}> sair</span>
+								Conectado no Twitter como <span style={{ fontWeight: 'bold' }}>{userTwitter.userName}</span>,
+								<span onClick={logoutTwitterSocial} className={styles.logoutSocialMedia}> sair</span>
 							</span>
 						</div>
 						:

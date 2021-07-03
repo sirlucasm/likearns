@@ -211,6 +211,7 @@ const Options = ({ me }) => {
 				<div className="d-flex flex-column align-items-center">
 					<SocialMediaButtons
 						userTwitter={userTwitter}
+						userInstagram={userInstagram}
 					/>
 				</div>
 			</div>
