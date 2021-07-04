@@ -47,7 +47,7 @@ export default function SocialMediaButtons({ userTwitter, userInstagram }) {
 						<div className="ml-3">
 							<span>
 								<RiShieldUserFill color="#4caf50" size={24} className="mr-1" />
-								Conectado no Instagram como <span style={{ fontWeight: 'bold' }}>{userInstagram.userName}</span>,
+								Conectado no Instagram como <span style={{ fontWeight: 'bold' }}>{userInstagram.username}</span>,
 								<span onClick={logoutInstagramSocial} className={styles.logoutSocialMedia}> sair</span>
 							</span>
 						</div>
