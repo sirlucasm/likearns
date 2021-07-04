@@ -22,7 +22,8 @@ const customStyles = {
 export default function ProgressLoader({
 	enabled,
 	title,
-	colorText
+	colorText,
+	transparent
 }) {
 
 	useEffect(() => {
@@ -41,7 +42,7 @@ export default function ProgressLoader({
 
 	return (
 		enabled ? (
-			<div className={styles["loader-bg-dark"]}>
+			<div className={transparent ? styles["loader-bg-transparent"] : styles["loader-bg-dark"]}>
 				<div className={styles["loader-content"]} id="loader">
 					<div className={styles["loader"]}>
 						<div className={styles["loader-title"]}>

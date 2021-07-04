@@ -72,7 +72,6 @@ function InstagramLogin({
 	const loginWInstagram = (e) => {
 		e.preventDefault();
 		setIsLoading(true);
-		closeModal();
 		InstagramService.auth({ username, password })
 			.then(() => router.reload())
 	}
@@ -127,6 +126,7 @@ function InstagramLogin({
 					enabled={isLoading}
 					title="Entrando"
 					colorText="#fff"
+					transparent
 				/>
 			</div>
 		</Modal>
