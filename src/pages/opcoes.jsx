@@ -130,35 +130,46 @@ const Options = ({ me }) => {
 		setTitleLoading('Importando foto...');
 		setIsLoading(true);
 		if (socialMedia === 1) {
-			UserService.importProfilePic({ username: me.username, socialMedia })
-				.then(() => Swal.fire({
+			if (userInstagram) {
+				UserService.importProfilePic({ instagramToken: userInstagram.token, socialMedia })
+					.then(() => Swal.fire({
+						position: 'top-end',
+						icon: 'success',
+						text: `Você importou a foto de perfil do ${socialName}`,
+						showConfirmButton: false,
+						timer: 2500,
+					})
+						.then(() => {
+							setIsLoading(false);
+							router.replace('/opcoes');
+						})
+					)
+			} else {
+				setIsLoading(false);
+				Swal.fire({
 					position: 'top-end',
-					icon: 'success',
-					text: `Você importou a foto de perfil do ${socialName}`,
+					icon: 'error',
+					text: `Para importar a foto do ${socialName} para seu perfil, você deve fazer conectar a sua conta.`,
 					showConfirmButton: false,
 					timer: 2500,
 				})
-					.then(() => {
-						setIsLoading(false);
-						router.replace('/opcoes');
-					})
-				)
+			}
 		}
 		if (socialMedia === 2) {
 			if (userTwitter) {
 				UserService.importProfilePic({ username: userTwitter.userName, socialMedia })
-				.then(() => Swal.fire({
-					position: 'top-end',
-					icon: 'success',
-					text: `Você importou a foto de perfil do ${socialName}`,
-					showConfirmButton: false,
-					timer: 2500,
-				})
-					.then(() => {
-						setIsLoading(false);
-						router.replace('/opcoes');
+					.then(() => Swal.fire({
+						position: 'top-end',
+						icon: 'success',
+						text: `Você importou a foto de perfil do ${socialName}`,
+						showConfirmButton: false,
+						timer: 2500,
 					})
-				)
+						.then(() => {
+							setIsLoading(false);
+							router.replace('/opcoes');
+						})
+					)
 			} else {
 				setIsLoading(false);
 				Swal.fire({
@@ -365,7 +376,7 @@ export default Options;
 export async function getServerSideProps({ req }) {
 	const token = req.cookies.session_token;
 	if (!token) return redirectAuthenticityCustomUrl('/entrar');
-	
+
 	const me = await UserService.currentUser(token);
 	if (!me.verified_email) return redirectAuthenticityCustomUrl('/minha-conta/verificar');
 
