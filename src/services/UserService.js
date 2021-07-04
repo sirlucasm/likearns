@@ -215,5 +215,6 @@ export default {
 		Cookie.remove('session_token');
 		localStorage.removeItem('@likearns/twitter_token_secret');
 		localStorage.removeItem('@likearns/twitter_user_info');
+		localStorage.removeItem('@likearns/instagram_token');
 	},
 }

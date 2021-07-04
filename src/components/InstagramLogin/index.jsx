@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 // imports
 import Modal from 'react-modal';
@@ -6,6 +7,7 @@ import SimpleInput from '../../components/SimpleInput';
 import {
 	CustomButton
 } from '../../components/Styleds';
+import ProgressLoader from '../../components/ProgressLoading';
 
 // icons
 import {
@@ -16,6 +18,7 @@ import {
 	FiUser,
 	FiLock
 } from 'react-icons/fi';
+import InstagramService from '../../services/InstagramService';
 
 const customStyles = {
 	content: {
@@ -61,11 +64,17 @@ function InstagramLogin({
 	isOpen,
 	closeModal,
 }) {
+	const router = useRouter();
 	const [username, setUsername] = useState();
 	const [password, setPassword] = useState();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const loginWInstagram = (e) => {
 		e.preventDefault();
+		setIsLoading(true);
+		closeModal();
+		InstagramService.auth({ username, password })
+			.then(() => router.reload())
 	}
 
 	return (
@@ -114,6 +123,11 @@ function InstagramLogin({
 						Entrar
 					</CustomButton>
 				</form>
+				<ProgressLoader
+					enabled={isLoading}
+					title="Entrando"
+					colorText="#fff"
+				/>
 			</div>
 		</Modal>
 	);

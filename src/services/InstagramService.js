@@ -15,7 +15,7 @@ export default {
 
 	async auth(params) {
 		try {
-			const res = await API.post('instagram/auth', { params, headers });
+			const res = await API.post('instagram/login', params, { headers });
 			if (res.status === 200) localStorage.setItem('@likearns/instagram_token', JSON.stringify(res.data));
 			return res.message;
 		} catch (error) {
