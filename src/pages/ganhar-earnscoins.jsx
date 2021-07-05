@@ -5,8 +5,7 @@ import { useRouter } from 'next/router';
 import Drawer from '../components/Drawer';
 import StartNav from '../components/StartNav';
 import { CustomButton } from '../components/Styleds';
-import GainFollowerService from '../services/GainFollowerService';
-import GainLikeService from '../services/GainLikeService';
+import ProgressLoader from '../components/ProgressLoading';
 import Swal from 'sweetalert2';
 import {
 	calculatePointsToEarn,
@@ -23,6 +22,8 @@ import styles from '../styles/pages/ganhar-earnscoins.module.css';
 import TwitterService from '../services/TwitterService';
 import UserService from '../services/UserService';
 import InstagramService from '../services/InstagramService';
+import GainFollowerService from '../services/GainFollowerService';
+import GainLikeService from '../services/GainLikeService';
 
 // icons
 import {
@@ -38,7 +39,8 @@ const GainEarnsCoins = ({
 }) => {
 	const router = useRouter();
 	const { oauth_token, oauth_verifier } = router.query;
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
+	const [titleLoading, setTitleLoading] = useState('Carregando...');
 	const [openMenu, setOpenMenu] = useState(false);
 	const [pageF, setPageF] = useState(1);
 	const [limitF, setLimitF] = useState(10);
@@ -154,6 +156,7 @@ const GainEarnsCoins = ({
 						:
 						<CustomButton
 							onClick={() => {
+								if (data.social_media === 1) return instagramLikePost(data);
 								if (data.social_media === 2) return twitterLikePost(data);
 							}}
 							primary
@@ -185,8 +188,12 @@ const GainEarnsCoins = ({
 	}
 
 	const twitterFollowUser = (param) => {
+		setIsLoading(true);
+		setTitleLoading('Seguindo usuário');
+
 		param.twitter = userTwitter;
 		param.current_user = me.id;
+
 		UserService.verifyIfUserFollowed({ gain_follower_id: param.id })
 			.then(res => {
 				if (!res.following) {
@@ -201,7 +208,7 @@ const GainEarnsCoins = ({
 											text: `Você seguiu @${param.username} e ganhou ${calculatePointsToEarn(param.lost_points)} EC's`,
 											showConfirmButton: false,
 											timer: 2500,
-										}).then(() => window.location.reload());
+										}).then(() => router.reload());
 									});
 							} else {
 								Swal.fire({
@@ -224,9 +231,13 @@ const GainEarnsCoins = ({
 					});
 				}
 			})
+		setIsLoading(false);
 	}
 
 	const twitterLikePost = (param) => {
+		setIsLoading(true);
+		setTitleLoading('Curtindo postagem');
+
 		param.twitter = userTwitter;
 		let getPostId = param.post_url.split('https://twitter.com/')[1].split('/');
 		param.post = {
@@ -235,6 +246,7 @@ const GainEarnsCoins = ({
 			username: getPostId[0],
 		}
 		param.current_user = me.id;
+
 		UserService.verifyIfUserPostLiked({ gain_like_id: param.id })
 			.then(res => {
 				if (!res.liking) {
@@ -249,7 +261,7 @@ const GainEarnsCoins = ({
 											text: `Você curtiu a postagem de @${param.post.username} e ganhou ${calculatePointsToEarn(param.lost_points)} EC's`,
 											showConfirmButton: false,
 											timer: 2500,
-										}).then(() => window.location.reload());
+										}).then(() => router.reload());
 									});
 							}
 						})
@@ -271,6 +283,52 @@ const GainEarnsCoins = ({
 					});
 				}
 			})
+		setIsLoading(false);
+	}
+
+	const instagramLikePost = async (param) => {
+		setIsLoading(true);
+		setTitleLoading('Curtindo postagem');
+
+		const postData = await InstagramService.getMediaData({ post_url: param.post_url });
+		param.instagramToken = userInstagram.token;
+		param.postId = postData.media_id;
+		param.current_user = me.id;
+
+		const res = await UserService.verifyIfUserPostLiked({ gain_like_id: param.id });
+		if (!res.liking) {
+			const instaPostLike = await InstagramService.likePost(param)
+				if (instaPostLike.token) {
+					UserService.gainPointsLiking({ token: instaPostLike.token })
+						.then(() => {
+							Swal.fire({
+								position: 'top-end',
+								icon: 'success',
+								text: `Você curtiu a postagem de @${postData.author_name} e ganhou ${calculatePointsToEarn(param.lost_points)} EC's`,
+								showConfirmButton: false,
+								timer: 2500,
+							}).then(() => router.reload());
+						});
+				} else {
+					Swal.fire({
+						position: 'top-end',
+						icon: 'error',
+						text: 'Você deve estar conectado',
+						showConfirmButton: false,
+						timer: 2500,
+					})
+				}
+				
+		} else {
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				text: 'Você já realizou esta ação. 👀',
+				showConfirmButton: false,
+				timer: 2500,
+			});
+		}
+		setIsLoading(false);
 	}
 
 	useEffect(() => {
@@ -327,6 +385,11 @@ const GainEarnsCoins = ({
 				</div>
 
 				<DailyReward me={me} />
+				<ProgressLoader
+					enabled={isLoading}
+					title={titleLoading}
+					colorText="#fff"
+				/>
 				<div className={styles.adsArea}>
 					{/*   ANÚNCIOS   */}
 					{/* banner */}

@@ -17,7 +17,25 @@ export default {
 		try {
 			const res = await API.post('instagram/login', params, { headers });
 			if (res.status === 200) localStorage.setItem('@likearns/instagram_token', JSON.stringify(res.data));
-			return res.message;
+			return res.data;
+		} catch (error) {
+			return Promise.reject(error.response);
+		}
+	},
+
+	async likePost(params) {
+		try {
+			const res = await API.post('instagram/posts/like', params, { headers });
+			return res.data;
+		} catch (error) {
+			return Promise.reject(error.response);
+		}
+	},
+
+	async getMediaData(params) {
+		try {
+			const res = await API.get('instagram/posts/getMediaData', { params, headers });
+			return res.data;
 		} catch (error) {
 			return Promise.reject(error.response);
 		}
