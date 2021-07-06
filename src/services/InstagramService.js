@@ -28,6 +28,17 @@ export default {
 			const res = await API.post('instagram/posts/like', params, { headers });
 			return res.data;
 		} catch (error) {
+			if (error.response.status === 404) return { message: 'Postagem não existe' };
+			return Promise.reject(error.response);
+		}
+	},
+
+	async followUser(params) {
+		try {
+			const res = await API.post('instagram/followers/follow', params, { headers });
+			return res.data;
+		} catch (error) {
+			if (error.response.status === 404) return Promise.reject({ message: 'Usuário não existe' });
 			return Promise.reject(error.response);
 		}
 	},

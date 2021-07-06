@@ -110,6 +110,7 @@ const GainEarnsCoins = ({
 						:
 						<CustomButton
 							onClick={() => {
+								if (data.social_media === 1) return instagramFollowUser(data);
 								if (data.social_media === 2) return twitterFollowUser(data);
 							}}
 							primary
@@ -286,40 +287,95 @@ const GainEarnsCoins = ({
 		setIsLoading(false);
 	}
 
+	const instagramFollowUser = async (param) => {
+		setIsLoading(true);
+		setTitleLoading('Seguindo usuário');
+
+		param.instagramToken = userInstagram.token;
+		param.current_user = me.id;
+
+		const res = await UserService.verifyIfUserPostLiked({ gain_like_id: param.id });
+		if (!res.following) {
+			InstagramService.followUser(param)
+				.then(instaUserFollow => {
+					if (instaUserFollow.token) {
+						UserService.gainPointsFollowing({ token: instaUserFollow.token })
+							.then(() => {
+								Swal.fire({
+									position: 'top-end',
+									icon: 'success',
+									text: `Você seguiu @${param.username} e ganhou ${calculatePointsToEarn(param.lost_points)} EC's`,
+									showConfirmButton: false,
+									timer: 2500,
+								}).then(() => router.reload());
+							});
+					} else {
+						setIsLoading(false);
+						Swal.fire({
+							position: 'top-end',
+							icon: 'error',
+							text: 'Você deve estar conectado',
+							showConfirmButton: false,
+							timer: 2500,
+						})
+					}
+				}, error => {
+					setIsLoading(false);
+					Swal.fire({ position: 'top-end', icon: 'error', text: error.message, showConfirmButton: false, timer: 2500, });
+				})
+		} else {
+			setIsLoading(false);
+			Swal.fire({
+				position: 'top-end',
+				icon: 'error',
+				text: 'Você já realizou esta ação. 👀',
+				showConfirmButton: false,
+				timer: 2500,
+			});
+		}
+	}
+
 	const instagramLikePost = async (param) => {
 		setIsLoading(true);
 		setTitleLoading('Curtindo postagem');
 
-		const postData = await InstagramService.getMediaData({ post_url: param.post_url });
 		param.instagramToken = userInstagram.token;
-		param.postId = postData.media_id;
 		param.current_user = me.id;
 
 		const res = await UserService.verifyIfUserPostLiked({ gain_like_id: param.id });
 		if (!res.liking) {
-			const instaPostLike = await InstagramService.likePost(param)
-				if (instaPostLike.token) {
-					UserService.gainPointsLiking({ token: instaPostLike.token })
-						.then(() => {
-							Swal.fire({
-								position: 'top-end',
-								icon: 'success',
-								text: `Você curtiu a postagem de @${postData.author_name} e ganhou ${calculatePointsToEarn(param.lost_points)} EC's`,
-								showConfirmButton: false,
-								timer: 2500,
-							}).then(() => router.reload());
-						});
-				} else {
-					Swal.fire({
-						position: 'top-end',
-						icon: 'error',
-						text: 'Você deve estar conectado',
-						showConfirmButton: false,
-						timer: 2500,
-					})
-				}
-				
+			const postData = await InstagramService.getMediaData({ post_url: param.post_url });
+			param.postId = postData.media_id;
+			
+			InstagramService.likePost(param)
+				.then (instaPostLike => {
+					if (instaPostLike.token) {
+						UserService.gainPointsLiking({ token: instaPostLike.token })
+							.then(() => {
+								Swal.fire({
+									position: 'top-end',
+									icon: 'success',
+									text: `Você curtiu a postagem de @${postData.author_name} e ganhou ${calculatePointsToEarn(param.lost_points)} EC's`,
+									showConfirmButton: false,
+									timer: 2500,
+								}).then(() => router.reload());
+							});
+					} else {
+						setIsLoading(false);
+						Swal.fire({
+							position: 'top-end',
+							icon: 'error',
+							text: 'Você deve estar conectado',
+							showConfirmButton: false,
+							timer: 2500,
+						})
+					}
+				}, error => {
+					setIsLoading(false);
+					Swal.fire({ position: 'top-end', icon: 'error', text: error.message, showConfirmButton: false, timer: 2500, });
+				})
 		} else {
+			setIsLoading(false);
 			Swal.fire({
 				position: 'top-end',
 				icon: 'error',
