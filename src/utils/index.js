@@ -4,6 +4,7 @@ moment.locale('pt-BR');
 
 const COST_PER_FOLLOWER = 30;
 const COST_PER_LIKE = 20;
+const COST_EARNS = 0.0008;
 
 export function parseData(data) {
 	if (!data) return {};
@@ -38,6 +39,18 @@ export function calculatePointsToEarn(lostPoints) {
 	let earnPoints = lostPoints / 2;
 	if (lostPoints >= 10) earnPoints = lostPoints / 10;
 	return parseInt(earnPoints);
+}
+
+const currencyOptions = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+}).resolvedOptions();
+
+export function calculateEarns(points) {
+	return (points * COST_EARNS).toLocaleString('pt-BR', {
+		...currencyOptions,
+		style: 'decimal',
+	});
 }
 
 export function convertSocialMediaToString(socialMedia) {

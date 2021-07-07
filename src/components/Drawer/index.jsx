@@ -23,8 +23,9 @@ import {
 	RiCopperCoinLine,
 	RiHeart3Line,
 	RiGroupLine,
-	RiSettings2Line
+	RiSettings2Line,
 } from 'react-icons/ri';
+import { GiReceiveMoney } from 'react-icons/gi';
 
 
 
@@ -75,6 +76,10 @@ export default function Drawer({ toggleDrawer, open, profile }) {
 				<ListItem button onClick={() => handleLinkURL('/ganhar-earnscoins')}>
 					<ListItemIcon><RiCopperCoinLine /></ListItemIcon>
 					<ListItemText primary="Ganhar EarnsCoins" />
+				</ListItem>
+				<ListItem button onClick={() => handleLinkURL('/retirar')}>
+					<ListItemIcon><GiReceiveMoney /></ListItemIcon>
+					<ListItemText primary="Retirar" />
 				</ListItem>
 				<ListItem button onClick={() => handleLinkURL('/opcoes')}>
 					<ListItemIcon><RiSettings2Line /></ListItemIcon>
