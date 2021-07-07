@@ -28,7 +28,8 @@ export default {
 			const res = await API.post('instagram/posts/like', params, { headers });
 			return res.data;
 		} catch (error) {
-			if (error.response.status === 404) return { message: 'Postagem não existe' };
+			if (error.response.status === 404) return Promise.reject({ message: 'Postagem não existe' });
+			if (error.response.status === 400) return Promise.reject({ message: 'Você atingiu o limite de likes por dia' });
 			return Promise.reject(error.response);
 		}
 	},
@@ -39,6 +40,7 @@ export default {
 			return res.data;
 		} catch (error) {
 			if (error.response.status === 404) return Promise.reject({ message: 'Usuário não existe' });
+			if (error.response.status === 400) return Promise.reject({ message: 'Você atingiu o limite de follows por dia' });
 			return Promise.reject(error.response);
 		}
 	},
