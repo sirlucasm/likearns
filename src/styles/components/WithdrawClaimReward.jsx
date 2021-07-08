@@ -52,6 +52,7 @@ export const Button = styled.div`
 	${props => props.comingSoon && `
 		&::after {
 			content: '(em breve)';
+			font-size: 14px;
 			position: absolute;
 			right: 15px;
 		}
