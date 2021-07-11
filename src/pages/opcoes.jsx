@@ -40,7 +40,7 @@ import {
 	RiCheckFill,
 	RiCloseFill,
 	RiDeleteBin6Fill,
-	RiErrorWarningLine
+	RiPaypalLine
 } from 'react-icons/ri';
 
 
@@ -53,6 +53,8 @@ const Options = ({ me }) => {
 		name: true,
 		username: true,
 		birth_date: true,
+		paypal_email: true,
+		pix_key: true
 	});
 	const [changes, setChanges] = useState();
 	const [userTwitter, setUserTwitter] = useState();
@@ -65,9 +67,11 @@ const Options = ({ me }) => {
 
 	const handleEditValue = (input) => {
 		if (
-			inputDisabled[input] === inputDisabled.name && (inputDisabled.username && inputDisabled.birth_date) &&
-			inputDisabled[input] === inputDisabled.username && (inputDisabled.name && inputDisabled.birth_date) &&
-			inputDisabled[input] === inputDisabled.birth_date && (inputDisabled.name && inputDisabled.username)
+			inputDisabled[input] === inputDisabled.name &&
+			inputDisabled[input] === inputDisabled.username &&
+			inputDisabled[input] === inputDisabled.birth_date &&
+			inputDisabled[input] === inputDisabled.paypal_email &&
+			inputDisabled[input] === inputDisabled.pix_key
 		) {
 			setChanges({ [input]: me[input] });
 			setInputDisabled(prev => { return { ...prev, [input]: false } });
@@ -342,6 +346,73 @@ const Options = ({ me }) => {
 							}
 						</div>
 					</div>
+					<div className={styles.areaInput}>
+						<div className={styles.inputField}>
+							<SimpleInput
+								type="text"
+								placeholder="Email Paypal"
+								icon={
+									<RiPaypalLine color={'#505050'} />
+								}
+								iconPosition="right"
+								required
+								onChange={(e) => setChanges({ paypal_email: e.target.value })}
+								defaultValue={me && me.paypal_email}
+								disabled={inputDisabled.paypal_email}
+							/>
+						</div>
+						<div className="ml-2">
+							{
+								inputDisabled.paypal_email ?
+									<CustomIconButton rounded onClick={() => handleEditValue('paypal_email')}><RiPencilLine /></CustomIconButton>
+									:
+									(
+										<>
+											<CustomIconButton rounded disabled={saveButtonDisabled} onClick={() => saveChanges()}><RiCheckFill /></CustomIconButton>
+											<CustomIconButton rounded onClick={() => handleCancelEditValue('paypal_email')}><RiCloseFill /></CustomIconButton>
+										</>
+									)
+							}
+						</div>
+					</div>
+					<div className={styles.areaInput}>
+						<div className={styles.inputField}>
+							<SimpleInput
+								type="text"
+								placeholder="Chave Pix"
+								icon={
+									<img
+										src={'/assets/icons/pix_icon.png'}
+										style={{
+											width: 17,
+											height: 17,
+											pointerEvents: 'none',
+											userSelect: 'none'
+										}}
+									/>
+								}
+								iconPosition="right"
+								required
+								onChange={(e) => setChanges({ pix_key: e.target.value })}
+								defaultValue={me && me.pix_key}
+								disabled={inputDisabled.pix_key}
+							/>
+						</div>
+						<div className="ml-2">
+							{
+								inputDisabled.pix_key ?
+									<CustomIconButton rounded onClick={() => handleEditValue('pix_key')}><RiPencilLine /></CustomIconButton>
+									:
+									(
+										<>
+											<CustomIconButton rounded disabled={saveButtonDisabled} onClick={() => saveChanges()}><RiCheckFill /></CustomIconButton>
+											<CustomIconButton rounded onClick={() => handleCancelEditValue('pix_key')}><RiCloseFill /></CustomIconButton>
+										</>
+									)
+							}
+						</div>
+					</div>
+
 					<div className={styles.areaInput, 'mt-5'}>
 						<div>
 							<CustomIconButton
