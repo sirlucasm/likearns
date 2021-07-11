@@ -15,10 +15,30 @@ import {
 	RiPaypalFill
 } from 'react-icons/ri';
 
+// services
+import UserWithdrawService from '../../services/UserWithdrawService';
+
 const WithdrawClaimReward = ({
 	me,
 	rewardValue
 }) => {
+	const PaypalWithdraw = async () => {
+		setIsLoading(true);
+		const params = {
+			withdraw_type: 1,
+			email_address: me.paypal_email,
+			value: rewardValue,
+		};
+		UserWithdrawService.createPaypalOrder(params)
+			.then(() => Swal.fire({
+				position: 'top-end',
+				icon: 'success',
+				text: 'Solicitação de retirada criada com sucesso.',
+				showConfirmButton: false,
+				timer: 2500,
+			}))
+	}
+
 	return (
 		<Div className="container">
 			<FormOfPayment>

@@ -56,6 +56,13 @@ const Withdraw = ({
 			<WithdrawClaimReward
 				me={me}
 				rewardValue={rewardValue}
+				setIsLoading={setIsLoading}
+			/>
+
+			<ProgressLoader
+				enabled={isLoading}
+				title={titleLoading}
+				colorText="#fff"
 			/>
 
 		</div>
@@ -67,7 +74,7 @@ export default Withdraw;
 export async function getServerSideProps({ req }) {
 	const token = req.cookies.session_token;
 	if (!token) return redirectAuthenticityCustomUrl('/entrar');
-	
+
 	const me = await UserService.currentUser(token);
 	if (!me.verified_email) return redirectAuthenticityCustomUrl('/minha-conta/verificar');
 
