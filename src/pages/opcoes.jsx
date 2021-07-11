@@ -346,6 +346,11 @@ const Options = ({ me }) => {
 							}
 						</div>
 					</div>
+
+					<div className={styles.areaTitle}>
+						<h3 className={styles.areaTitleText}>Configurar retirada</h3>
+					</div>
+
 					<div className={styles.areaInput}>
 						<div className={styles.inputField}>
 							<SimpleInput
@@ -413,7 +418,7 @@ const Options = ({ me }) => {
 						</div>
 					</div>
 
-					<div className={styles.areaInput, 'mt-5'}>
+					<div className={styles.areaInput, 'mt-5 mb-5'}>
 						<div>
 							<CustomIconButton
 								onClick={deleteAccount}
