@@ -111,7 +111,7 @@ const WithdrawClaimReward = ({
 						<h3>Formas de retirada</h3>
 					</TitleArea>
 					<ShowHistoryArea>
-						<span>ver retiradas</span>
+						<span onClick={() => Router.push('minha-conta/retiradas')}>ver retiradas</span>
 					</ShowHistoryArea>
 				</HeaderTitle>
 				<Button

@@ -53,6 +53,13 @@ export function calculateEarns(points, locale='pt-BR') {
 	});
 }
 
+export function convertValueToEarns(value, locale='pt-BR') {
+	return value.toLocaleString(locale, {
+		...currencyOptions,
+		style: 'decimal',
+	});
+}
+
 export function convertEarnsToPoints({ earns, points, wantEarn }) {
 	return (points * wantEarn / earns);
 }
@@ -60,6 +67,11 @@ export function convertEarnsToPoints({ earns, points, wantEarn }) {
 export function convertSocialMediaToString(socialMedia) {
 	if (socialMedia === 1) return 'Instagram';
 	else if (socialMedia === 2) return 'Twitter';
+}
+
+export function convertWithdrawTypeToString(withdraw_type) {
+	if (withdraw_type === 1) return 'Paypal';
+	else if (withdraw_type === 2) return 'Pix';
 }
 
 export function getCurrentYear() {
