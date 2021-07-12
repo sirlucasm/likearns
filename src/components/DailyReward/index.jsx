@@ -74,7 +74,7 @@ export default function DailyReward({ me }) {
 			<RewardLine>
 				<Reward>
 					<DetailReward>
-						<Tooltip title="Receba 100 EC's diariamente">
+						<Tooltip title="Receba 250 EC's diariamente">
 							<span>Diária</span>
 						</Tooltip>
 					</DetailReward>
@@ -101,7 +101,7 @@ export default function DailyReward({ me }) {
 
 				<Reward>
 					<DetailReward>
-						<Tooltip title="Receba 150 EC's de presente ao convidar 1 amigo">
+						<Tooltip title="Receba 875 EC's de presente ao convidar 1 amigo">
 							<span>1 convidados</span>
 						</Tooltip>
 					</DetailReward>
@@ -124,7 +124,7 @@ export default function DailyReward({ me }) {
 
 				<Reward>
 					<DetailReward>
-						<Tooltip title="Receba 300 EC's de presente ao convidar 5 amigos">
+						<Tooltip title="Receba 1875 EC's de presente ao convidar 5 amigos">
 							<span>5 convidados</span>
 						</Tooltip>
 					</DetailReward>
@@ -147,7 +147,7 @@ export default function DailyReward({ me }) {
 
 				<Reward>
 					<DetailReward>
-						<Tooltip title="Receba 500 EC's de presente ao convidar 10 amigos">
+						<Tooltip title="Receba 3125 EC's de presente ao convidar 10 amigos">
 							<span>10 convidados</span>
 						</Tooltip>
 					</DetailReward>
@@ -170,7 +170,7 @@ export default function DailyReward({ me }) {
 
 				<Reward>
 					<DetailReward>
-						<Tooltip title="Receba 700 EC's de presente ao convidar 50 amigos">
+						<Tooltip title="Receba 6250 EC's de presente ao convidar 50 amigos">
 							<span>50 convidados</span>
 						</Tooltip>
 					</DetailReward>
@@ -193,7 +193,7 @@ export default function DailyReward({ me }) {
 
 				<Reward>
 					<DetailReward>
-						<Tooltip title="Receba 1000 EC's de presente ao convidar 100 amigos">
+						<Tooltip title="Receba 12500 EC's de presente ao convidar 100 amigos">
 							<span>100 convidados</span>
 						</Tooltip>
 					</DetailReward>
