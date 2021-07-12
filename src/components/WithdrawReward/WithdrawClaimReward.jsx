@@ -1,12 +1,21 @@
+import { useState } from 'react';
+import Router from 'next/router';
 import {
 	Div,
 	PixIcon,
+	HeaderTitle,
 	TitleArea,
+	ShowHistoryArea,
 	FormOfPayment,
 	Button,
-	ClaimRuleAlert
+	ClaimRuleAlert,
+	SelectValue,
+	SelectValueItem,
 } from '../../styles/components/WithdrawClaimReward';
 import Swal from 'sweetalert2';
+import {
+	convertEarnsToPoints
+} from '../../utils';
 // icons
 import {
 	RiCopperCoinLine,
@@ -20,22 +29,24 @@ import UserWithdrawService from '../../services/UserWithdrawService';
 const WithdrawClaimReward = ({
 	me,
 	rewardValue,
-	setIsLoading,
-	lostPoints
+	setIsLoading
 }) => {
 	const MINIMAL_VALUE = 5;
-	const value = parseFloat(rewardValue);
+	const currentValue = parseFloat(rewardValue);
+	const [valueSelected, setValueSelected] = useState(0);
+	const [lostPoints, setLostPoints] = useState(0);
+	const values = [5, 10, 15, 20];
 
 	const PaypalWithdraw = async (event) => {
 		const params = {
 			withdraw_type: 1,
 			email_address: me.paypal_email,
-			value,
-			lostPoints
+			value: valueSelected,
+			lost_points: lostPoints
 		};
 		if (!event.target.attributes['disabled']) {
-			// botão habilitado
-			if ((params.value > MINIMAL_VALUE)) {
+			if (me.paypal_email) {
+				// botão habilitado
 				setIsLoading(true);
 				UserWithdrawService.createPaypalOrder(params)
 					.then(() => Swal.fire({
@@ -45,23 +56,69 @@ const WithdrawClaimReward = ({
 						showConfirmButton: false,
 						timer: 2500,
 					})
-						.then(() => setIsLoading(false))
+						.then(() => {
+							setIsLoading(false);
+							Router.reload();
+						})
 					)
+			} else {
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					text: 'Você deve adicionar um email Paypal válido em "Opções".',
+					showConfirmButton: false,
+					timer: 2500,
+				})
 			}
 		}
 	}
 
+	const canWithdraw = (currentValue >= MINIMAL_VALUE);
+	const canWithdrawSelectedValue = (valueSelected >= MINIMAL_VALUE);
+
+	const handleSelectValue = (value) => {
+		setValueSelected(value);
+		setLostPoints(
+			convertEarnsToPoints({
+				earns: currentValue,
+				points: me.points,
+				wantEarn: value
+			})
+		);
+	}
+
 	return (
 		<Div className="container">
+			<SelectValue active>
+				{
+					values.map((value, key) => {
+						return (
+							<SelectValueItem
+								key={key} 
+								disabled={!canWithdraw}
+								active={valueSelected === value}
+								onClick={() => canWithdraw ? handleSelectValue(value) : ''}
+							>
+								<span>R${value}</span>
+							</SelectValueItem>
+						)
+					})
+				}
+			</SelectValue>
 			<FormOfPayment>
-				<TitleArea>
-					<h3>Formas de retirada</h3>
-				</TitleArea>
+				<HeaderTitle>
+					<TitleArea>
+						<h3>Formas de retirada</h3>
+					</TitleArea>
+					<ShowHistoryArea>
+						<span>ver retiradas</span>
+					</ShowHistoryArea>
+				</HeaderTitle>
 				<Button
 					hoverColor={'rgba(0, 150, 218, .212)'}
 					hoverBorderColor={'rgba(0, 150, 218, .312)'}
-					disabled={!(value > MINIMAL_VALUE)}
-					onClick={PaypalWithdraw}
+					disabled={!canWithdrawSelectedValue}
+					onClick={(e) => canWithdraw ? PaypalWithdraw(e) : ''}
 				>
 					<RiPaypalFill size={18} />
 					<span>Paypal</span>
@@ -76,7 +133,7 @@ const WithdrawClaimReward = ({
 					<span>Pix</span>
 				</Button>
 			</FormOfPayment>
-			<ClaimRuleAlert redAlert={!(value > MINIMAL_VALUE)}>
+			<ClaimRuleAlert redAlert={!canWithdraw}>
 				<RiAlertLine size={16} />
 				<span>É necessário ter pelo menos <strong>R${MINIMAL_VALUE}</strong> para efetuar a retirada.</span>
 			</ClaimRuleAlert>

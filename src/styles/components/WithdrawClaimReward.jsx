@@ -12,10 +12,26 @@ export const PixIcon = styled.img`
 	pointer-events: none;
 `;
 
+export const HeaderTitle = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
+
 export const TitleArea = styled.div`
 	h3 {
 		font-size: 16px;
 		color: #333;
+	}
+`;
+
+export const ShowHistoryArea = styled.div`
+	span {
+		cursor: pointer;
+		font-size: 16px;
+		color: #8ea0ff;
+	}
+	span:hover {
+		color: #5873fc;
 	}
 `;
 
@@ -79,4 +95,35 @@ export const ClaimRuleAlert = styled.div`
 		margin-left: 6px;
 		font-size: 13px;
 	}
+`;
+
+export const SelectValue = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
+export const SelectValueItem = styled.div`
+	user-select: none;
+	background: #eaeaea;
+	cursor: pointer;
+	border-radius: 50%;
+	padding: 12px 0;
+	width: 49px;
+	margin: 0 8px;
+	text-align: center;
+	border: 1px dotted transparent;
+	&:hover {
+		background: ${props => !props.active && '#e6e6e6'};
+	}
+	span {
+		font-size: 14px;
+	}
+	${props => props.active ? {
+		background: '#f9f9f9',
+		border: '1px dotted #c94040',
+	} : ''}
+	${props => props.disabled ? {
+		background: '#e6e6e6',
+		cursor: 'default',
+	} : ''}
 `;

@@ -10,7 +10,6 @@ import WithdrawClaimReward from '../components/WithdrawReward/WithdrawClaimRewar
 import ProgressLoader from '../components/ProgressLoading';
 import {
 	calculateEarns,
-	convertEarnsToPoints
 } from '../utils';
 import { NextSeo } from 'next-seo';
 import {
@@ -57,11 +56,6 @@ const Withdraw = ({
 			<WithdrawClaimReward
 				me={me}
 				rewardValue={rewardValueEnUs}
-				lostPoints={convertEarnsToPoints({
-					earns: rewardValueEnUs,
-					points: me.points,
-					wantEarn: rewardValueEnUs
-				})}
 				setIsLoading={setIsLoading}
 			/>
 
