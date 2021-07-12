@@ -53,6 +53,10 @@ export function calculateEarns(points, locale='pt-BR') {
 	});
 }
 
+export function convertEarnsToPoints({ earns, points, wantEarn }) {
+	return (points * wantEarn / earns);
+}
+
 export function convertSocialMediaToString(socialMedia) {
 	if (socialMedia === 1) return 'Instagram';
 	else if (socialMedia === 2) return 'Twitter';

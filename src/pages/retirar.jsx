@@ -10,6 +10,7 @@ import WithdrawClaimReward from '../components/WithdrawReward/WithdrawClaimRewar
 import ProgressLoader from '../components/ProgressLoading';
 import {
 	calculateEarns,
+	convertEarnsToPoints
 } from '../utils';
 import { NextSeo } from 'next-seo';
 import {
@@ -30,6 +31,7 @@ const Withdraw = ({
 	const [titleLoading, setTitleLoading] = useState('Carregando...');
 	const [openMenu, setOpenMenu] = useState(false);
 	const [rewardValue, setRewardValue] = useState(calculateEarns(me.points));
+	const [rewardValueEnUs, setRewardValueEnUs] = useState(calculateEarns(me.points, 'en-US'));
 
 	return (
 		<div>
@@ -54,7 +56,12 @@ const Withdraw = ({
 
 			<WithdrawClaimReward
 				me={me}
-				rewardValue={calculateEarns(me.points, 'en-US')}
+				rewardValue={rewardValueEnUs}
+				lostPoints={convertEarnsToPoints({
+					earns: rewardValueEnUs,
+					points: me.points,
+					wantEarn: rewardValueEnUs
+				})}
 				setIsLoading={setIsLoading}
 			/>
 

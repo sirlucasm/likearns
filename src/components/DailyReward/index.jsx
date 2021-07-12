@@ -85,7 +85,7 @@ export default function DailyReward({ me }) {
 							:
 							<>
 								<RiCopperCoinLine size={18} />
-								<h3 style={{ margin: '5px 0 0 3px', }}>100</h3>
+								<h3 style={{ margin: '5px 0 0 3px', }}>250</h3>
 							</>
 						}
 					</Points>
@@ -94,7 +94,7 @@ export default function DailyReward({ me }) {
 							me.reward_daily || formatedTime ?
 								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
-								<ClaimButton onClick={() => claimReward('reward_daily', 100)}>Resgatar</ClaimButton>
+								<ClaimButton onClick={() => claimReward('reward_daily', 250)}>Resgatar</ClaimButton>
 						}
 					</div>
 				</Reward>
@@ -107,7 +107,7 @@ export default function DailyReward({ me }) {
 					</DetailReward>
 					<Points>
 						<RiCopperCoinLine size={18} />
-						<h3 style={{ margin: '5px 0 0 3px', }}>150</h3>
+						<h3 style={{ margin: '5px 0 0 3px', }}>875</h3>
 					</Points>
 					<div style={{ marginTop: 9 }}>
 						{
@@ -115,7 +115,7 @@ export default function DailyReward({ me }) {
 								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
 								me.invited_friends >= 1 ?
-									<ClaimButton onClick={() => claimReward('reward_level1', 150)}>Resgatar</ClaimButton>
+									<ClaimButton onClick={() => claimReward('reward_level1', 875)}>Resgatar</ClaimButton>
 									:
 									<ClaimButtonDisabled avaiableToClaim={true} disabled><RiCloseLine /></ClaimButtonDisabled>
 						}
@@ -130,7 +130,7 @@ export default function DailyReward({ me }) {
 					</DetailReward>
 					<Points>
 						<RiCopperCoinLine size={18} />
-						<h3 style={{ margin: '5px 0 0 3px', }}>300</h3>
+						<h3 style={{ margin: '5px 0 0 3px', }}>1875</h3>
 					</Points>
 					<div style={{ marginTop: 9 }}>
 						{
@@ -138,7 +138,7 @@ export default function DailyReward({ me }) {
 								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
 								me.invited_friends >= 5 ?
-									<ClaimButton onClick={() => claimReward('reward_level5', 300)}>Resgatar</ClaimButton>
+									<ClaimButton onClick={() => claimReward('reward_level5', 1875)}>Resgatar</ClaimButton>
 									:
 									<ClaimButtonDisabled avaiableToClaim={true} disabled><RiCloseLine /></ClaimButtonDisabled>
 						}
@@ -153,7 +153,7 @@ export default function DailyReward({ me }) {
 					</DetailReward>
 					<Points>
 						<RiCopperCoinLine size={18} />
-						<h3 style={{ margin: '5px 0 0 3px', }}>500</h3>
+						<h3 style={{ margin: '5px 0 0 3px', }}>3125</h3>
 					</Points>
 					<div style={{ marginTop: 9 }}>
 						{
@@ -161,7 +161,7 @@ export default function DailyReward({ me }) {
 								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
 								me.invited_friends >= 10 ?
-									<ClaimButton onClick={() => claimReward('reward_level10', 500)}>Resgatar</ClaimButton>
+									<ClaimButton onClick={() => claimReward('reward_level10', 3125)}>Resgatar</ClaimButton>
 									:
 									<ClaimButtonDisabled avaiableToClaim={true} disabled><RiCloseLine /></ClaimButtonDisabled>
 						}
@@ -176,7 +176,7 @@ export default function DailyReward({ me }) {
 					</DetailReward>
 					<Points>
 						<RiCopperCoinLine size={18} />
-						<h3 style={{ margin: '5px 0 0 3px', }}>700</h3>
+						<h3 style={{ margin: '5px 0 0 3px', }}>6250</h3>
 					</Points>
 					<div style={{ marginTop: 9 }}>
 						{
@@ -184,7 +184,7 @@ export default function DailyReward({ me }) {
 								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
 								me.invited_friends >= 50 ?
-									<ClaimButton onClick={() => claimReward('reward_level50', 700)}>Resgatar</ClaimButton>
+									<ClaimButton onClick={() => claimReward('reward_level50', 6250)}>Resgatar</ClaimButton>
 									:
 									<ClaimButtonDisabled avaiableToClaim={true} disabled><RiCloseLine /></ClaimButtonDisabled>
 						}
@@ -199,7 +199,7 @@ export default function DailyReward({ me }) {
 					</DetailReward>
 					<Points>
 						<RiCopperCoinLine size={18} />
-						<h3 style={{ margin: '5px 0 0 3px', }}>1000</h3>
+						<h3 style={{ margin: '5px 0 0 3px', }}>12500</h3>
 					</Points>
 					<div style={{ marginTop: 9 }}>
 						{
@@ -207,7 +207,7 @@ export default function DailyReward({ me }) {
 								<ClaimButtonDisabled disabled><RiCheckFill /></ClaimButtonDisabled>
 								:
 								me.invited_friends >= 100 ?
-									<ClaimButton onClick={() => claimReward('reward_level100', 1000)}>Resgatar</ClaimButton>
+									<ClaimButton onClick={() => claimReward('reward_level100', 12500)}>Resgatar</ClaimButton>
 									:
 									<ClaimButtonDisabled avaiableToClaim={true} disabled><RiCloseLine /></ClaimButtonDisabled>
 						}

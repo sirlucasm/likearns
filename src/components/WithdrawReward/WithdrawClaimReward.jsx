@@ -20,7 +20,8 @@ import UserWithdrawService from '../../services/UserWithdrawService';
 const WithdrawClaimReward = ({
 	me,
 	rewardValue,
-	setIsLoading
+	setIsLoading,
+	lostPoints
 }) => {
 	const MINIMAL_VALUE = 5;
 	const value = parseFloat(rewardValue);
@@ -29,7 +30,8 @@ const WithdrawClaimReward = ({
 		const params = {
 			withdraw_type: 1,
 			email_address: me.paypal_email,
-			value
+			value,
+			lostPoints
 		};
 		if (!event.target.attributes['disabled']) {
 			// botão habilitado
