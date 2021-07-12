@@ -69,3 +69,14 @@ export const Button = styled.div`
 		margin: auto 10px;
 	}
 `;
+
+export const ClaimRuleAlert = styled.div`
+	display: flex;
+	align-items: center;
+	color: ${props => props.redAlert ? '#b12323' : '#363636'};
+	justify-content: flex-start;
+	span {
+		margin-left: 6px;
+		font-size: 13px;
+	}
+`;

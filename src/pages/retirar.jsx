@@ -8,7 +8,6 @@ import { CustomButton } from '../components/Styleds';
 import WithdrawReward from '../components/WithdrawReward';
 import WithdrawClaimReward from '../components/WithdrawReward/WithdrawClaimReward';
 import ProgressLoader from '../components/ProgressLoading';
-import Swal from 'sweetalert2';
 import {
 	calculateEarns,
 } from '../utils';
@@ -55,7 +54,7 @@ const Withdraw = ({
 
 			<WithdrawClaimReward
 				me={me}
-				rewardValue={rewardValue}
+				rewardValue={calculateEarns(me.points, 'en-US')}
 				setIsLoading={setIsLoading}
 			/>
 

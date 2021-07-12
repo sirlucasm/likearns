@@ -46,8 +46,8 @@ const currencyOptions = new Intl.NumberFormat('pt-BR', {
     currency: 'BRL',
 }).resolvedOptions();
 
-export function calculateEarns(points) {
-	return (points * COST_EARNS).toLocaleString('pt-BR', {
+export function calculateEarns(points, locale='pt-BR') {
+	return (points * COST_EARNS).toLocaleString(locale, {
 		...currencyOptions,
 		style: 'decimal',
 	});
