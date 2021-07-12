@@ -81,7 +81,7 @@ export default function Drawer({ toggleDrawer, open, profile }) {
 					<ListItemIcon><GiReceiveMoney /></ListItemIcon>
 					<ListItemText primary="Retirar" />
 				</ListItem>
-				<ListItem button onClick={() => handleLinkURL('/opcoes')}>
+				<ListItem button onClick={() => handleLinkURL('/minha-conta/opcoes')}>
 					<ListItemIcon><RiSettings2Line /></ListItemIcon>
 					<ListItemText primary="Opções" />
 				</ListItem>

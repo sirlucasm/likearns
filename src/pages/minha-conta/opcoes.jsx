@@ -2,33 +2,33 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 // imports
-import Drawer from '../components/Drawer';
-import StartNav from '../components/StartNav';
-import SimpleInput from '../components/SimpleInput';
-import AuthPassword from '../components/AuthPassword';
-import ProgressLoader from '../components/ProgressLoading';
+import Drawer from '../../components/Drawer';
+import StartNav from '../../components/StartNav';
+import SimpleInput from '../../components/SimpleInput';
+import AuthPassword from '../../components/AuthPassword';
+import ProgressLoader from '../../components/ProgressLoading';
 import {
 	CustomIconButton,
 	CustomButton,
-} from '../components/Styleds';
+} from '../../components/Styleds';
 import {
 	getCurrentYear,
 	getCurrentMonth,
 	getCurrentDay,
 	convertDateBR,
 	convertSocialMediaToString
-} from '../utils';
+} from '../../utils';
 import Swal from 'sweetalert2';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
-import SocialMediaButtons from '../components/SocialMediaButtons';
+import SocialMediaButtons from '../../components/SocialMediaButtons';
 import { Tooltip } from '@material-ui/core';
-import styles from '../styles/pages/opcoes.module.css';
+import styles from '../../styles/pages/opcoes.module.css';
 
 // services
-import TwitterService from '../services/TwitterService';
-import UserService from '../services/UserService';
-import InstagramService from '../services/InstagramService';
+import TwitterService from '../../services/TwitterService';
+import UserService from '../../services/UserService';
+import InstagramService from '../../services/InstagramService';
 
 // icons
 import {
