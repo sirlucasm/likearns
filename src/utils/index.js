@@ -60,6 +60,19 @@ export function convertValueToEarns(value, locale='pt-BR') {
 	});
 }
 
+export function convertStatusToBgColor(status) {
+	if (status === 0) return '#8a8a8a';
+	if (status === 1) return '#3a9c2c';
+	if (status === 2) return '#c41e12';
+	if (status === 3) return '#cf6b1f';
+}
+export function convertStatusToString(status) {
+	if (status === 0) return 'Pendente';
+	if (status === 1) return 'Concluida';
+	if (status === 2) return 'Cancelada';
+	if (status === 3) return 'Rejeitada';
+}
+
 export function convertEarnsToPoints({ earns, points, wantEarn }) {
 	return (points * wantEarn / earns);
 }

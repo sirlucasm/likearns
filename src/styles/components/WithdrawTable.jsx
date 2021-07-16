@@ -29,3 +29,26 @@ export const NoWithdraw = styled.div`
 		margin-top: 20px;
 	}
 `;
+
+export const StatusCaptionArea = styled.div`
+	display: flex;
+	justify-content: space-evenly;
+`;
+
+export const StatusCaption = styled.div`
+	display: flex;
+	align-items: center;
+	@media screen and (max-width: 620px) {
+		display: flex;
+		flex-direction: column;
+	}
+	div {
+		background-color: ${props => props.bgColor};
+		border-radius: 50%;
+		width: 18px;
+		height: 18px;
+		margin-right: 4px;
+	}
+	span { font-size: 14px;	}
+	margin-bottom: 40px;
+`;
