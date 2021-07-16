@@ -72,10 +72,10 @@ export async function getServerSideProps({ req }) {
 	const token = req.cookies.session_token;
 	if (!token) return redirectAuthenticityCustomUrl('/entrar');
 
-	const isAuthenticated = await UserService.authenticated(token);
-	if (isAuthenticated) return redirectAuthenticityCustomUrl('/inicio');
+	const me = await UserService.currentUser(token);
+	if (me.verified_email) return redirectAuthenticityCustomUrl('/inicio');
 
 	return {
-		props: {}
+		props: { me }
 	};
 }

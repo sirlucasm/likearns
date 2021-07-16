@@ -110,10 +110,10 @@ export default ResetPassword;
 
 export async function getServerSideProps({ req }) {
 	const token = req.cookies.session_token;
-	let isAuthenticated;
-	if (token) isAuthenticated = await UserService.authenticated(token);
+	if (token) return redirectAuthenticityCustomUrl('/inicio');
 
-	if (isAuthenticated) return redirectAuthenticityCustomUrl('/inicio');
+	const me = await UserService.currentUser(token);
+	if (!me.verified_email) return redirectAuthenticityCustomUrl('/minha-conta/verificar');
 
 	return {
 		props: {}
