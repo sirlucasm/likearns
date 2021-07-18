@@ -24,6 +24,7 @@ import {
 	RiHeart3Line,
 	RiGroupLine,
 	RiSettings2Line,
+	RiAdminLine
 } from 'react-icons/ri';
 import { GiReceiveMoney } from 'react-icons/gi';
 
@@ -85,6 +86,13 @@ export default function Drawer({ toggleDrawer, open, profile }) {
 					<ListItemIcon><RiSettings2Line /></ListItemIcon>
 					<ListItemText primary="Opções" />
 				</ListItem>
+				{
+					profile.user_type === 'moderator' &&
+					<ListItem button onClick={() => handleLinkURL('/app/moderacao')}>
+						<ListItemIcon><RiAdminLine /></ListItemIcon>
+						<ListItemText primary="Admin" />
+					</ListItem>
+				}
 			</List>
 			<Divider />
 			<List>
