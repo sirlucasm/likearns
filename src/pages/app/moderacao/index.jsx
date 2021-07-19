@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 // imports
-import Drawer from '../../components/Drawer';
-import StartNav from '../../components/StartNav';
+import Drawer from '../../../components/Drawer';
+import StartNav from '../../../components/StartNav';
 import { NextSeo } from 'next-seo';
 import {
 	redirectAuthenticityCustomUrl
-} from '../../utils/auth';
-import styles from '../../styles/pages/retirar.module.css';
+} from '../../../utils/auth';
+import styles from '../../../styles/pages/retirar.module.css';
 import {
 	Div,
 	ModerationElement,
 	ModerationItemTitle,
 	HoverAnimation
-} from '../../styles/pages/app/Moderacao';
+} from '../../../styles/pages/app/Moderacao';
 
 // services
-import UserService from '../../services/UserService';
+import UserService from '../../../services/UserService';
+import UserWithdrawService from '../../../services/UserWithdrawService';
 
 // icons
 import {
@@ -32,10 +33,19 @@ const Withdraw = ({
 	const [titleLoading, setTitleLoading] = useState('Carregando...');
 	const [openMenu, setOpenMenu] = useState(false);
 
+	const [withdrawsQuantity, setWithdrawsQuantity] = useState();
+	const [usersQuantity, setUsersQuantity] = useState();
+
+	const handleRoute = (url) => {
+		router.push(url);
+	}
+	
 	return (
 		<div>
 			<NextSeo
 				title='Moderação'
+				nofollow={true}
+				noindex={true}
 			/>
 			<StartNav setOpenMenu={setOpenMenu} profile={me} />
 			<Drawer
@@ -49,7 +59,7 @@ const Withdraw = ({
 			</div>
 
 			<Div className="container">
-				<ModerationElement>
+				<ModerationElement onClick={() => handleRoute('/app/moderacao/retiradas')}>
 					<MdPayment size={22} />
 					<ModerationItemTitle>
 						<span>Retiradas</span>
@@ -68,6 +78,7 @@ export async function getServerSideProps({ req }) {
 
 	const me = await UserService.currentUser(token);
 	if (!me.verified_email) return redirectAuthenticityCustomUrl('/minha-conta/verificar');
+	if (!me.user_type === 'moderator') return redirectAuthenticityCustomUrl('/inicio');
 
 	return {
 		props: {
